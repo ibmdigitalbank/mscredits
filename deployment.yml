@@ -18,7 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mscredit
-  namespace: default
+  namespace: prod
   labels:
     app: mscredit
 spec:
