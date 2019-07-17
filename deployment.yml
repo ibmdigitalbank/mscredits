@@ -34,7 +34,7 @@ spec:
         app: mscredit
     spec:
       containers:
-        - image: mscredits-containers:9
+        - image: us.icr.io/ibmdigitalbank/mscredits-containers:latest
           imagePullPolicy: Always
           name: mscredit
           ports:
