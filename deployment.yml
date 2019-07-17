@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mscredit
+  labels:
+    app: mscredit
+    run: mscredit
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: mscredit
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mscredit
+  namespace: default
+  labels:
+    app: mscredit
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mscredit
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mscredit
+    spec:
+      containers:
+        - image: us.icr.io/ibmdigitalbank/mscredits-containers:9
+          imagePullPolicy: Always
+          name: mscredit
+          ports:
+            - containerPort: 8082
