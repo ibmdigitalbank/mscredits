@@ -4,15 +4,15 @@ kind: Service
 metadata:
   name: mscredit
   labels:
-    app: mscredit
-    run: mscredit
+    k8s-app: mysql
+    run: mysql
 spec:
   type: NodePort
   ports:
     - port: 8082
       protocol: TCP
   selector:
-    app: mscredit
+    k8s-app: mysql
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -20,18 +20,18 @@ metadata:
   name: mscredit
   namespace: prod
   labels:
-    app: mscredit
+    k8s-app: mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mscredit
+      k8s-app: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mscredit
+        k8s-app: mysql
     spec:
       containers:
         - image: us.icr.io/ibmdigitalbank/mscredits-containers:9
